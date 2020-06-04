@@ -1,0 +1,17 @@
+{
+  "name": "ErrandRN",
+  "displayName": "ErrandRN",
+  "expo": {
+    "name": "ErrandRN",
+    "slug": "ErrandRN",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
