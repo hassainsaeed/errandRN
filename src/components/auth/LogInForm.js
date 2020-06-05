@@ -6,6 +6,7 @@ class LogInForm extends Component {
   constructor(props) {
     super(props)
     this.authorizeLogin = this.props.authorizeLogin
+    this.handleLoginError = this.props.handleLoginError
     this.handleLogIn = this.handleLogIn.bind(this)
     this.state = {
       email: '',
@@ -25,8 +26,10 @@ class LogInForm extends Component {
         const token = res.data.token
         this.authorizeLogin(token)
       })
-      .catch(error => {
-        console.log("Nope" + error)
+      .catch(err => {
+        console.log("Error" + err)
+        console.log("Error Response:" + JSON.stringify(err.response))
+        this.handleLoginError(err, err.response.data)
       })
   }
 
@@ -40,6 +43,7 @@ class LogInForm extends Component {
           })))}
           placeholder="Email"
         />
+        <br/>
         <TextInput
           value = {this.state.password}
           onChangeText = {(newValue) => this.setState(state => ({
@@ -48,11 +52,12 @@ class LogInForm extends Component {
           secureTextEntry
           placeholder="Password"
         />
-
+        <br/>
         <Button
           onPress={this.handleLogIn}
           title="Log In"
         />
+        <br/>
       </View>
     );
   }

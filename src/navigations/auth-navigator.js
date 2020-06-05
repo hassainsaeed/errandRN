@@ -23,6 +23,7 @@ class AuthNavigator extends Component {
                             backgroundColor: '#33D5FF',
                         },
                         headerTintColor: '#fff',
+                        headerTitleAlign: "center",
                         headerTitleStyle: {
                             fontWeight: 'bold',
                         },
@@ -32,11 +33,12 @@ class AuthNavigator extends Component {
                     name="SignUp" 
                     component={SignUpScreen}
                     options={{
-                        title: 'Sign Up',
+                        title: 'Sign Up for Errand',
                         headerStyle: {
                             backgroundColor: '#33D5FF',
                         },
                         headerTintColor: '#fff',
+                        headerTitleAlign: "center",
                         headerTitleStyle: {
                             fontWeight: 'bold',
                         },

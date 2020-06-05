@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import FlashMessage from "react-native-flash-message";
 import AuthNavigator from './auth-navigator';
 import AppNavigator from './app-navigator'
 
@@ -31,6 +32,7 @@ class RootNavigator extends Component {
                         }}  
                     />
                 </Stack.Navigator>
+                <FlashMessage position="top" />
             </NavigationContainer>
         );
     }
