@@ -5,16 +5,17 @@ import Axios from 'axios';
 class LogInForm extends Component {
   constructor(props) {
     super(props)
-    this.authorizeLogin = this.props.authorizeLogin
-    this.handleLoginError = this.props.handleLoginError
-    this.handleLogIn = this.handleLogIn.bind(this)
+    this.logInAuthorized = this.props.logInAuthorized
+    this.logInErrorHandler = this.props.logInErrorHandler
+    this.initiateLogIn = this.initiateLogIn.bind(this)
     this.state = {
       email: '',
       password: ''
     }
   }
 
-  handleLogIn(event) {
+  initiateLogIn(event) {
+    //preventDefault prevents form submission from opening a new page
     event.preventDefault()
 
     const email = this.state.email
@@ -24,12 +25,12 @@ class LogInForm extends Component {
       .then(res => {
         console.log("Log In successful")
         const token = res.data.token
-        this.authorizeLogin(token)
+        this.logInAuthorized(token)
       })
       .catch(err => {
         console.log("Error" + err)
         console.log("Error Response:" + JSON.stringify(err.response))
-        this.handleLoginError(err, err.response.data)
+        this.logInErrorHandler(err, err.response.data)
       })
   }
 
@@ -42,8 +43,8 @@ class LogInForm extends Component {
             email: newValue
           })))}
           placeholder="Email"
+          style= {styles.textInput}
         />
-        <br/>
         <TextInput
           value = {this.state.password}
           onChangeText = {(newValue) => this.setState(state => ({
@@ -51,13 +52,12 @@ class LogInForm extends Component {
           }))}
           secureTextEntry
           placeholder="Password"
+          style= {styles.textInput}
         />
-        <br/>
         <Button
-          onPress={this.handleLogIn}
+          onPress={this.initiateLogIn}
           title="Log In"
         />
-        <br/>
       </View>
     );
   }
@@ -66,9 +66,13 @@ class LogInForm extends Component {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    justifyContent: 'center',
-    padding: 24,
-  }
+    justifyContent: 'center'
+  },
+  textInput: {
+    margin: 15,
+    padding: 15,
+    borderWidth: 'thin',
+  },
 });
 
 export default LogInForm;

@@ -9,15 +9,15 @@ class LoginScreen extends Component {
     constructor(props) {
         super(props);
         this.navigation = this.props.navigation
-        this.authorizeLogin = this.authorizeLogin.bind(this)
-        this.handleLoginError = this.handleLoginError.bind(this)
+        this.logInAuthorized = this.logInAuthorized.bind(this)
+        this.logInErrorHandler = this.logInErrorHandler.bind(this)
         this.state = {
           error: false,
           error_message: "",
         }
     }
 
-    authorizeLogin(token) {
+    logInAuthorized(token) {
       const storeData = async (token) => {
         try {
           const jsonValue = JSON.stringify(token)
@@ -31,7 +31,7 @@ class LoginScreen extends Component {
       this.navigation.navigate('App')
     }
 
-    handleLoginError(err, errResponse) { 
+    logInErrorHandler(err, errResponse) { 
       let errorMessage = err.message
       if ("errors" in errResponse && "message" in errResponse.errors) {
         errorMessage = errResponse.errors.message 
@@ -51,7 +51,7 @@ class LoginScreen extends Component {
         return(
             <SafeAreaView style={styles.container}>
               <Text style={styles.title} > Sign In </Text>
-              <LogInForm authorizeLogin = {this.authorizeLogin} handleLoginError = {this.handleLoginError}/>
+              <LogInForm logInAuthorized = {this.logInAuthorized} logInErrorHandler = {this.logInErrorHandler}/>
               <br/>
               <TouchableHighlight onPress={() => this.navigation.navigate('SignUp')}> 
                 <Text>Don't have an account? Click here to sign up </Text>
@@ -65,11 +65,12 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     justifyContent: 'center',
+    //flex: 1,
     padding: 24,
   },
   title: {
     margin: 24,
-    marginTop: 0,
+    marginTop: 50,
     fontSize: 36,
     fontWeight: 'bold',
     textAlign: 'center',

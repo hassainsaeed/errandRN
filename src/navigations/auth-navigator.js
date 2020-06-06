@@ -33,7 +33,7 @@ class AuthNavigator extends Component {
                     name="SignUp" 
                     component={SignUpScreen}
                     options={{
-                        title: 'Sign Up for Errand',
+                        title: 'Welcome to Errand',
                         headerStyle: {
                             backgroundColor: '#33D5FF',
                         },
