@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import {Text, StyleSheet, View, TextInput, Button} from 'react-native';
+import PhoneInput from 'react-phone-number-input'
+import phoneInputStyle from '../../assets/css/phone-number-input.css'
 import Axios from 'axios';
 
 class SignUpForm extends Component {
@@ -28,6 +30,11 @@ class SignUpForm extends Component {
         let password = this.state.password
         let passwordConfirm = this.state.password_confirm
         let phoneNumber = this.state.phone_number
+
+        validateNames(firstName, lastName)
+        validateEmail(email)
+        validatePasswords(password, passwordConfirm)
+        validatePhoneNumber(phoneNumber)
 
         if (password != passwordConfirm) {
             const err = { message: "Sorry, the passwords didn't match"}
@@ -93,14 +100,15 @@ class SignUpForm extends Component {
                     secureTextEntry
                     style= {styles.textInput}
                 />
-                <TextInput
+                <PhoneInput 
                     value = {this.state.phone_number}
-                    onChangeText = {(newValue) => this.setState((state => ({
+                    onChange= {(newValue) => this.setState((state => ({
                         phone_number: newValue
                     })))}
-                    keyboardType= "numeric"
-                    placeholder="Phone Number"
-                    style= {styles.textInput}
+                    placeholder="Phone number"
+                    countries={["CA", "US"]}
+                    defaultCountry="CA"
+                    style={phoneInputStyle}
                 />
                 <Button
                     onPress={this.signUpUser}
@@ -122,7 +130,8 @@ const styles = StyleSheet.create({
       textAlign: 'center',
       borderWidth: 'thin',
       backgroundColor: "#E8F0FE",
-    },
+    }
   });
+
 
 export default SignUpForm
